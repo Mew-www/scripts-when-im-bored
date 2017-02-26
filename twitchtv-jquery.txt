@@ -1,0 +1,6 @@
+/*
+ Every 5sec store messages from everyone per user
+ Fired and forget in the background while streaming or whatever; Then look up from window.stored.<whatever-bot-or-actual-user-nickname>
+ Remember in head, or set another global for interval, if wanna reset and change the script or smtn. Otherwise to reset just (window.)stored = {} 
+*/
+window.stored={}; setInterval(()=> { $(".chat-line").each((i, lineEl)=>{ var person = $(lineEl).find(".from").text(); var msg = $(lineEl).find(".message").text().trim(); if (Object.keys(window.stored).indexOf(person) === -1) { window.stored[person] = []; } if (window.stored[person].indexOf(msg) === -1) {window.stored[person].push(msg)} }) }, 5000);
